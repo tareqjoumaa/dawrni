@@ -55,7 +55,7 @@ class Favorite(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ('client', 'company')  # Ensure uniqueness of client-company pairs
+        unique_together = ('client', 'company')
 
 
 class Appointment(models.Model):

@@ -314,6 +314,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
     filterset_fields = ["category", ]
     search_fields = ["name_ar", "name_en",]
 
+
 def serialize_user(user):
     return {
         "email": user.email,
@@ -368,8 +369,23 @@ def get_user(request):
     try:
         user = request.user
         if user.is_authenticated:
+            c_user = custom_user.objects.get(email=user.email)
+            company = Company.objects.filter(user=user).first()
+            client = Client.objects.filter(user=user).first()
+
+            if company:
+                image_url = str(company.image)
+            elif client:
+                image_url = str(client.photo)
+            else:
+                image_url = None
+
             return Response({
-                "email": user.email,
+                "id": c_user.id,
+                "email": c_user.email,
+                "image": image_url,
+                "user_type": c_user.user_type,
+                "is_verified": c_user.is_verified,
                 'status': 200,
             })
         else:

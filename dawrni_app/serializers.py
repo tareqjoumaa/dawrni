@@ -20,15 +20,7 @@ class CompanyPhotoSerializer(serializers.ModelSerializer):
         model = CompanyPhoto
         fields = '__all__'
 
-class AppointmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Appointment
-        fields = '__all__'
 
-class FavoriteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Favorite
-        fields = '__all__'
 
 class ClientSerializer(serializers.ModelSerializer):
     favorites = serializers.SerializerMethodField()
@@ -56,7 +48,7 @@ class ClientSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.name_en = validated_data.get('name_en', instance.name_en)
         instance.name_ar = validated_data.get('name_ar', instance.name_ar)
-        image_file = validated_data.get('image', None)
+        image_file = validated_data.get('photo', None)
         if image_file:
             instance.photo = image_file
         instance.save()
@@ -179,6 +171,55 @@ class CompanySerializer(serializers.ModelSerializer):
         CompanySerializer(instance)
         return instance
         
+
+class AppointmentSerializer(serializers.ModelSerializer):
+    company = CompanySerializer()
+
+    class Meta:
+        model = Appointment
+        fields = ['id', 'client', 'company', 'date', 'time', 'status']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        company_data = representation['company']
+        
+        representation['company'] = {
+            'id': company_data['id'],
+            'name': company_data['name'],
+            'category_id': company_data['category'],
+            'image': company_data['image'],
+            'address': company_data['address'],
+            'about': company_data['about'],
+            'is_certified': company_data['is_certified'],
+            'lat': company_data['lat'],
+            'lng': company_data['lng'],
+        }
+        return representation
+
+class FavoriteSerializer(serializers.ModelSerializer):
+    company = CompanySerializer()
+
+    class Meta:
+        model = Favorite
+        fields = '__all__'
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        company_data = representation['company']
+        
+        representation['company'] = {
+            'id': company_data['id'],
+            'name': company_data['name'],
+            'category_id': company_data['category'],
+            'image': company_data['image'],
+            'address': company_data['address'],
+            'about': company_data['about'],
+            'is_certified': company_data['is_certified'],
+            'lat': company_data['lat'],
+            'lng': company_data['lng'],
+        }
+        return representation
+
 
 class VerifyAccountSerializer(serializers.Serializer):
     email = serializers.EmailField()
