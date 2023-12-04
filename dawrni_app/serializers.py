@@ -21,6 +21,23 @@ class CompanyPhotoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class CompanyProfileSerializer(serializers.ModelSerializer):
+    photos = CompanyPhotoSerializer(many=True, read_only=True)
+    class Meta:
+        model = Company
+        fields = '__all__'
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        photos_data = representation.pop('photos', None)
+        representation['photos'] = photos_data
+        return representation
+
+class ClientProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        exclude = ('favorites',)  # Exclude the user field from serialization
+
 
 class ClientSerializer(serializers.ModelSerializer):
     favorites = serializers.SerializerMethodField()
@@ -58,6 +75,7 @@ class ClientSerializer(serializers.ModelSerializer):
     def get_favorites(self, obj):
         favorites = Favorite.objects.filter(client=obj)
         return [fav.company.id for fav in favorites]
+
 
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -174,6 +192,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
 class AppointmentSerializer(serializers.ModelSerializer):
     company = CompanySerializer()
+    client = ClientSerializer()  # Adjust with your actual ClientSerializer
 
     class Meta:
         model = Appointment
@@ -182,7 +201,8 @@ class AppointmentSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         company_data = representation['company']
-        
+        client_data = representation['client']
+
         representation['company'] = {
             'id': company_data['id'],
             'name': company_data['name'],
@@ -194,10 +214,17 @@ class AppointmentSerializer(serializers.ModelSerializer):
             'lat': company_data['lat'],
             'lng': company_data['lng'],
         }
+        representation['client'] = {
+            'id': client_data['id'],
+            'name': client_data['name'],
+            'email': client_data['email'],
+            'photo': client_data['photo'],
+        }
         return representation
 
 class FavoriteSerializer(serializers.ModelSerializer):
     company = CompanySerializer()
+    photos = CompanyPhotoSerializer(many=True, read_only=True)
 
     class Meta:
         model = Favorite
@@ -207,7 +234,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         company_data = representation['company']
         
-        representation['company'] = {
+        return {
             'id': company_data['id'],
             'name': company_data['name'],
             'category_id': company_data['category'],
@@ -217,8 +244,8 @@ class FavoriteSerializer(serializers.ModelSerializer):
             'is_certified': company_data['is_certified'],
             'lat': company_data['lat'],
             'lng': company_data['lng'],
-        }
-        return representation
+            'photos': company_data['photos'],
+            }
 
 
 class VerifyAccountSerializer(serializers.Serializer):

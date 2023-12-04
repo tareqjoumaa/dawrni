@@ -19,7 +19,8 @@ urlpatterns = [
     path('register/', views.register),
     path('verify/', views.verify),
     path('logout/', knox_views.LogoutView.as_view(), name='knox_logout'),
-   
+    path('profile/', views.profile),
+
     path('update_company/', views.update_company),
     path('company_photos/', views.Companyphotos),
     path('company_photos/<int:photo_id>', views.Companyphotos),

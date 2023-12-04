@@ -56,6 +56,26 @@ class AuthTokenSerializer(serializers.Serializer):
         attrs['user'] = user
         return attrs
 
+@api_view(['GET'])
+def profile(request):
+    user = request.user
+    if user.is_authenticated:
+        try:
+            company = Company.objects.get(user=user)
+            serializer = CompanyProfileSerializer(company, context={'request': request})
+            return Response(serializer.data)
+        except Company.DoesNotExist:
+            pass
+        try:
+            client = Client.objects.get(user=user)
+            serializer = ClientProfileSerializer(client, context={'request': request})
+            return Response(serializer.data)
+        except Client.DoesNotExist:
+            return Response({"error": "User is neither a company nor a client"}, status=400)
+    else:
+        return Response({"error": "User is not authenticated"}, status=401)
+    
+
 @api_view(['POST','DELETE'])
 @parser_classes([MultiPartParser, FormParser])
 def Companyphotos(request, photo_id=None):
@@ -191,11 +211,19 @@ class FavoriteViewSet(viewsets.ModelViewSet):
         return Appointment.objects.filter(client=client)
 
 
-@api_view(['POST', 'DELETE'])
+@api_view(['GET', 'POST', 'DELETE'])
 def favorite_company(request, company_id=None):
     try:
         user = request.user
-        client = Client.objects.get(user=user)    
+        client = Client.objects.get(user=user) 
+        if request.method == 'GET':
+            try:
+                favorites = Favorite.objects.filter(client=client)
+                serializer = FavoriteSerializer(favorites,  context={'request': request}, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except Client.DoesNotExist:
+                return Response({'error': 'Client not found'}, status=status.HTTP_404_NOT_FOUND)
+   
         if request.method == 'DELETE':
             try:
                 company = Company.objects.get(pk=company_id)
