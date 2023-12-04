@@ -158,7 +158,7 @@ def book_an_appointment(request, company_id=None, appointment_id=None):
                 'time': request.data.get('time'),  
             }
             appointment = Appointment.objects.create(**appointment_data)
-            serializer = AppointmentSerializer(appointment)
+            serializer = AppointmentSerializer(appointment, context={'request': request})
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         elif request.method == 'DELETE':

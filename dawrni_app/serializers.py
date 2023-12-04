@@ -201,7 +201,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Favorite
-        fields = '__all__'
+        exclude = ['id', 'client']
     
     def to_representation(self, instance):
         representation = super().to_representation(instance)
