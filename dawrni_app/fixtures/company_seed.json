@@ -1,0 +1,201 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "seed_user1",
+            "password": "1234567890",
+            "email": "email@example.com"
+        }
+    },
+    {
+        "model": "dawrni_app.custom_user",
+        "pk": 2,
+        "fields": {
+            "user_ptr": 1,
+            "full_name": "Full Name",
+            "user_type": "company",
+            "is_verified": true
+        }
+    },
+    {
+        "model": "dawrni_app.company",
+        "pk": 3,
+        "fields": {
+            "user": 1,
+            "name_ar": "Company 1 (Arabic)",
+            "name_en": "Company 1 (English)",
+            "category": 3,
+            "address_ar": "Address 1 (Arabic)",
+            "address_en": "Address 1 (English)",
+            "is_certified": true,
+            "about_ar": "About Company 1 (Arabic)",
+            "about_en": "About Company 1 (English)",
+            "image": null,
+            "lat": 37.7749,
+            "lng": -122.4194
+        }
+    },
+    {
+        "model": "dawrni_app.company",
+        "pk": 3,
+        "fields": {
+            "user": 1,
+            "name_ar": "Company 2 (Arabic)",
+            "name_en": "Company 2 (English)",
+            "category": 2,
+            "address_ar": "Address 2 (Arabic)",
+            "address_en": "Address 2 (English)",
+            "is_certified": true,
+            "about_ar": "About Company 2 (Arabic)",
+            "about_en": "About Company 2 (English)",
+            "image": null,
+            "lat": 37.7749,
+            "lng": -122.4194
+        }
+    },
+    {
+        "model": "dawrni_app.company",
+        "pk": 3,
+        "fields": {
+            "user": 1,
+            "name_ar": "Company 3 (Arabic)",
+            "name_en": "Company 3 (English)",
+            "category": 5,
+            "address_ar": "Address 3 (Arabic)",
+            "address_en": "Address 3 (English)",
+            "is_certified": true,
+            "about_ar": "About Company 3 (Arabic)",
+            "about_en": "About Company 3 (English)",
+            "image": null,
+            "lat": 37.7749,
+            "lng": -122.4194
+        }
+    },
+    {
+        "model": "dawrni_app.company",
+        "pk": 4,
+        "fields": {
+            "user": 1,
+            "name_ar": "Company 4 (Arabic)",
+            "name_en": "Company 4 (English)",
+            "category": 7,
+            "address_ar": "Address 4 (Arabic)",
+            "address_en": "Address 4 (English)",
+            "is_certified": false,
+            "about_ar": "About Company 4 (Arabic)",
+            "about_en": "About Company 4 (English)",
+            "image": null,
+            "lat": 37.7749,
+            "lng": -122.4194
+        }
+    },
+    {
+        "model": "dawrni_app.company",
+        "pk": 5,
+        "fields": {
+            "user": 1,
+            "name_ar": "Company 5 (Arabic)",
+            "name_en": "Company 5 (English)",
+            "category": 8,
+            "address_ar": "Address 5 (Arabic)",
+            "address_en": "Address 5 (English)",
+            "is_certified": true,
+            "about_ar": "About Company 5 (Arabic)",
+            "about_en": "About Company 5 (English)",
+            "image": null,
+            "lat": 37.7749,
+            "lng": -122.4194
+        }
+    },
+    {
+        "model": "dawrni_app.company",
+        "pk": 6,
+        "fields": {
+            "user": 1,
+            "name_ar": "Company 6 (Arabic)",
+            "name_en": "Company 6 (English)",
+            "category": 2,
+            "address_ar": "Address 6 (Arabic)",
+            "address_en": "Address 6 (English)",
+            "is_certified": false,
+            "about_ar": "About Company 6 (Arabic)",
+            "about_en": "About Company 6 (English)",
+            "image": null,
+            "lat": 37.7749,
+            "lng": -122.4194
+        }
+    },
+    {
+        "model": "dawrni_app.company",
+        "pk": 7,
+        "fields": {
+            "user": 1,
+            "name_ar": "Company 7 (Arabic)",
+            "name_en": "Company 7 (English)",
+            "category": 1,
+            "address_ar": "Address 7 (Arabic)",
+            "address_en": "Address 7 (English)",
+            "is_certified": true,
+            "about_ar": "About Company 7 (Arabic)",
+            "about_en": "About Company 7 (English)",
+            "image": null,
+            "lat": 37.7749,
+            "lng": -122.4194
+        }
+    },
+    {
+        "model": "dawrni_app.company",
+        "pk": 8,
+        "fields": {
+            "user": 1,
+            "name_ar": "Company 8 (Arabic)",
+            "name_en": "Company 8 (English)",
+            "category": 4,
+            "address_ar": "Address 8 (Arabic)",
+            "address_en": "Address 8 (English)",
+            "is_certified": false,
+            "about_ar": "About Company 8 (Arabic)",
+            "about_en": "About Company 8 (English)",
+            "image": null,
+            "lat": 37.7749,
+            "lng": -122.4194
+        }
+    },
+    {
+        "model": "dawrni_app.company",
+        "pk": 9,
+        "fields": {
+            "user": 1,
+            "name_ar": "Company 9 (Arabic)",
+            "name_en": "Company 9 (English)",
+            "category": 10,
+            "address_ar": "Address 9 (Arabic)",
+            "address_en": "Address 9 (English)",
+            "is_certified": true,
+            "about_ar": "About Company 9 (Arabic)",
+            "about_en": "About Company 9 (English)",
+            "image": null,
+            "lat": 37.7749,
+            "lng": -122.4194
+        }
+    },
+    {
+        "model": "dawrni_app.company",
+        "pk": 10,
+        "fields": {
+            "user": 1,
+            "name_ar": "Company 10 (Arabic)",
+            "name_en": "Company 10 (English)",
+            "category": 6,
+            "address_ar": "Address 10 (Arabic)",
+            "address_en": "Address 10 (English)",
+            "is_certified": false,
+            "about_ar": "About Company 10 (Arabic)",
+            "about_en": "About Company 10 (English)",
+            "image": null,
+            "lat": 37.7749,
+            "lng": -122.4194
+        }
+    }
+]

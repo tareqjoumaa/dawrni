@@ -151,7 +151,7 @@ def change_appointment_status(request, appointment_id=None):
             if new_status in ['pending', 'confirmed', 'canceled']:
                 appointment.status = new_status
                 appointment.save()
-                serializer = AppointmentSerializer(appointment)
+                serializer = AppointmentSerializer(appointment, context={'request': request})
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'Invalid appointment status'}, status=status.HTTP_400_BAD_REQUEST)

@@ -59,7 +59,7 @@ class ClientSerializer(serializers.ModelSerializer):
             'id': obj.id,
             'name': name,
             'email': obj.email,
-            'photo': obj.photo.url,
+            'photo': obj.photo.url if obj.photo else None,
             }
     
     def update(self, instance, validated_data):
@@ -192,7 +192,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
 class AppointmentSerializer(serializers.ModelSerializer):
     company = CompanySerializer()
-    client = ClientSerializer()  # Adjust with your actual ClientSerializer
+    client = ClientSerializer()
 
     class Meta:
         model = Appointment
@@ -213,12 +213,14 @@ class AppointmentSerializer(serializers.ModelSerializer):
             'is_certified': company_data['is_certified'],
             'lat': company_data['lat'],
             'lng': company_data['lng'],
+            'photos': company_data['photos'],
+
         }
         representation['client'] = {
             'id': client_data['id'],
             'name': client_data['name'],
             'email': client_data['email'],
-            'photo': client_data['photo'],
+            'photo': client_data.get('photo', None),
         }
         return representation
 
