@@ -195,7 +195,7 @@ def book_an_appointment(request, company_id=None, appointment_id=None):
 
 class ClientViewSet(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
-    queryset = Client.objects.all()  # Set your queryset based on your requirements
+    queryset = Client.objects.all() 
     pagination_class = LimitOffsetPagination
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     search_fields = ["name_ar", "name_en"]
@@ -208,7 +208,7 @@ class FavoriteViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         client = Client.objects.get(user=user)
-        return Appointment.objects.filter(client=client)
+        return Favorite.objects.filter(client=client)
 
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -230,7 +230,9 @@ def favorite_company(request, company_id=None):
             except Company.DoesNotExist:
                 return Response({'error': 'Company not found'}, status=status.HTTP_404_NOT_FOUND)
             Favorite.objects.filter(client=client, company=company).delete()
-
+            company.is_favorite = False
+            company.save()
+            
             return Response({'message': 'Company removed from favorites'}, status=status.HTTP_204_NO_CONTENT)
         
         elif request.method == 'POST':
@@ -239,7 +241,13 @@ def favorite_company(request, company_id=None):
             except Company.DoesNotExist:
                 return Response({'error': 'Company not found'}, status=status.HTTP_404_NOT_FOUND)
             favorite, created = Favorite.objects.get_or_create(client=client, company=company)
-            serializer = FavoriteSerializer(favorite)
+            
+            # Set is_favorite to True when adding to favorites
+            if created:
+                company.is_favorite = True
+                company.save()
+
+            serializer = FavoriteSerializer(favorite, context={'request': request})
             return Response(serializer.data, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
 
 

@@ -163,6 +163,8 @@ class CompanySerializer(serializers.ModelSerializer):
             'photos': CompanyPhotoSerializer(obj.photos.all(), many=True).data,
             'lat': obj.lat,
             'lng': obj.lng,
+            'is_favorite': obj.is_favorite,
+
         }
     
     def update(self, instance, validated_data):
@@ -213,6 +215,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             'is_certified': company_data['is_certified'],
             'lat': company_data['lat'],
             'lng': company_data['lng'],
+            'is_favorite': company_data['is_favorite'],
             'photos': company_data['photos'],
 
         }
@@ -223,6 +226,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             'photo': client_data.get('photo', None),
         }
         return representation
+
 
 class FavoriteSerializer(serializers.ModelSerializer):
     company = CompanySerializer()
@@ -247,6 +251,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
             'lat': company_data['lat'],
             'lng': company_data['lng'],
             'photos': company_data['photos'],
+            'is_favorite': company_data['is_favorite']
             }
 
 

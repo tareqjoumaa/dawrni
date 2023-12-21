@@ -3,7 +3,7 @@
         "model": "auth.user",
         "pk": 1,
         "fields": {
-            "username": "seed_user1",
+            "username": "email@example.com",
             "password": "1234567890",
             "email": "email@example.com"
         }
@@ -20,7 +20,7 @@
     },
     {
         "model": "dawrni_app.company",
-        "pk": 3,
+        "pk": 1,
         "fields": {
             "user": 1,
             "name_ar": "Company 1 (Arabic)",
@@ -33,12 +33,14 @@
             "about_en": "About Company 1 (English)",
             "image": null,
             "lat": 37.7749,
-            "lng": -122.4194
+            "lng": -122.4194,
+            "is_favorite": false
+
         }
     },
     {
         "model": "dawrni_app.company",
-        "pk": 3,
+        "pk": 2,
         "fields": {
             "user": 1,
             "name_ar": "Company 2 (Arabic)",
@@ -51,7 +53,8 @@
             "about_en": "About Company 2 (English)",
             "image": null,
             "lat": 37.7749,
-            "lng": -122.4194
+            "lng": -122.4194,
+            "is_favorite": false
         }
     },
     {
@@ -69,7 +72,8 @@
             "about_en": "About Company 3 (English)",
             "image": null,
             "lat": 37.7749,
-            "lng": -122.4194
+            "lng": -122.4194,
+            "is_favorite": false
         }
     },
     {
@@ -87,7 +91,9 @@
             "about_en": "About Company 4 (English)",
             "image": null,
             "lat": 37.7749,
-            "lng": -122.4194
+            "lng": -122.4194,
+            "is_favorite": false
+
         }
     },
     {
@@ -105,7 +111,9 @@
             "about_en": "About Company 5 (English)",
             "image": null,
             "lat": 37.7749,
-            "lng": -122.4194
+            "lng": -122.4194,
+            "is_favorite": false
+
         }
     },
     {
@@ -123,7 +131,8 @@
             "about_en": "About Company 6 (English)",
             "image": null,
             "lat": 37.7749,
-            "lng": -122.4194
+            "lng": -122.4194,
+            "is_favorite": false
         }
     },
     {
@@ -141,7 +150,8 @@
             "about_en": "About Company 7 (English)",
             "image": null,
             "lat": 37.7749,
-            "lng": -122.4194
+            "lng": -122.4194,
+            "is_favorite": false
         }
     },
     {
@@ -159,7 +169,8 @@
             "about_en": "About Company 8 (English)",
             "image": null,
             "lat": 37.7749,
-            "lng": -122.4194
+            "lng": -122.4194,
+            "is_favorite": false
         }
     },
     {
@@ -177,7 +188,8 @@
             "about_en": "About Company 9 (English)",
             "image": null,
             "lat": 37.7749,
-            "lng": -122.4194
+            "lng": -122.4194,
+            "is_favorite": false
         }
     },
     {
@@ -195,7 +207,8 @@
             "about_en": "About Company 10 (English)",
             "image": null,
             "lat": 37.7749,
-            "lng": -122.4194
+            "lng": -122.4194,
+            "is_favorite": false
         }
     }
 ]

@@ -34,6 +34,8 @@ class Company(models.Model):
     image = models.ImageField(upload_to='user_images/', null=True, blank=True)
     lat = models.FloatField(null=True, blank=True, verbose_name=_("Latitude"))
     lng = models.FloatField(null=True, blank=True, verbose_name=_("Longitude"))
+    is_favorite = models.BooleanField(default=False, verbose_name=_("Is Favorite"))
+
 
     # def __str__(self):
     #     return self.name_en
