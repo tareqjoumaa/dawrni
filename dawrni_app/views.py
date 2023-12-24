@@ -477,3 +477,7 @@ def verify(request):
 def privacy_policy(request):
     return render(request, 'privacy_policy.html')
 
+
+
+def test(request):
+    return render(request, 'privacy_policy.html')
