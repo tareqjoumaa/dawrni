@@ -17,6 +17,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import parser_classes
+from wsgiref.simple_server import demo_app
 from django.shortcuts import render, redirect
 
 
@@ -475,7 +476,7 @@ def verify(request):
     
 
 def privacy_policy(request):
-    return render(request, 'privacy_policy.html')
+    return render(request, 'dawrni_app/privacy_policy.html')
 
 
 
