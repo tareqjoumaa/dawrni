@@ -17,6 +17,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import parser_classes
+from django.shortcuts import render, redirect
 
 
 class AuthTokenSerializer(serializers.Serializer):
@@ -472,3 +473,7 @@ def verify(request):
             'message': _('An error occurred.'),
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)   
     
+
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')
+

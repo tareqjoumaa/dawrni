@@ -34,5 +34,6 @@ urlpatterns = [
     path('delete_appointment/<int:appointment_id>', views.book_an_appointment),
     path('status_appointment/<int:appointment_id>', views.change_appointment_status),
     
+    path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
     path('', include(router.urls)),
 ]
